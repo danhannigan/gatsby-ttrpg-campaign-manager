@@ -4,9 +4,9 @@ import { graphql } from "gatsby"
 import Layout from "../components/layouts/main-layout"
 import SEO from "../components/seo"
 
-const IndexPage = ({ data }) => (
+const AdventureLogsPage = ({ data }) => (
   <Layout>
-    <SEO title="Home" />
+    <SEO title="Adventure Logs" />
     <h2>Adventure Logs</h2>
     <ul>
       {data.adventureLogs.nodes.map(log => (
@@ -18,7 +18,7 @@ const IndexPage = ({ data }) => (
   </Layout>
 )
 
-export default IndexPage
+export default AdventureLogsPage
 
 export const indexQuery = graphql`
   query {
@@ -32,8 +32,6 @@ export const indexQuery = graphql`
         fileAbsolutePath
         frontmatter {
           title
-          in_game_date
-          locations
         }
       }
     }

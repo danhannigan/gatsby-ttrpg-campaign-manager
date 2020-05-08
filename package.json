@@ -1,22 +1,33 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "gatsby-ttrpg-campaign-manager",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Manage your TTRPG campaign (possibly impractically) via Gatsby and MDX. Used gatsby-starter-default for the base config",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Dan Hannigan <hi@danhannigan.dev>",
   "dependencies": {
-    "gatsby": "^2.21.13",
-    "gatsby-image": "^2.4.1",
+    "-": "0.0.1",
+    "@mdx-js/mdx": "^1.6.1",
+    "@mdx-js/react": "^1.6.1",
+    "babel-plugin-styled-components": "^1.10.7",
+    "g": "^2.0.1",
+    "gatsby": "^2.21.21",
+    "gatsby-cli": "^2.12.15",
+    "gatsby-image": "^2.4.3",
     "gatsby-plugin-manifest": "^2.4.2",
+    "gatsby-plugin-mdx": "^1.2.6",
     "gatsby-plugin-offline": "^3.2.1",
     "gatsby-plugin-react-helmet": "^3.3.1",
-    "gatsby-plugin-sharp": "^2.6.1",
+    "gatsby-plugin-sharp": "^2.6.2",
+    "gatsby-plugin-styled-components": "^3.3.1",
+    "gatsby-remark-images": "^3.3.2",
     "gatsby-source-filesystem": "^2.3.1",
-    "gatsby-transformer-sharp": "^2.5.1",
+    "gatsby-transformer-json": "^2.4.1",
+    "gatsby-transformer-sharp": "^2.5.2",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-helmet": "^6.0.0"
+    "react-helmet": "^6.0.0",
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
     "prettier": "2.0.5"
@@ -36,9 +47,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/danhannigan/gatsby-ttrpg-campaign-manager"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/danhannigan/gatsby-ttrpg-campaign-manager"
   }
 }

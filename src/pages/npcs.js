@@ -4,12 +4,12 @@ import { graphql } from "gatsby"
 import Layout from "../components/layouts/main-layout"
 import SEO from "../components/seo"
 
-const IndexPage = ({ data }) => (
+const NPCsPage = ({ data }) => (
   <Layout>
-    <SEO title="Home" />
-    <h2>Adventure Logs</h2>
+    <SEO title="NPCs" />
+    <h2>NPCs</h2>
     <ul>
-      {data.adventureLogs.nodes.map(log => (
+      {data.npcs.nodes.map(log => (
         <li>
           <Link to={log.fields.slug}>{log.frontmatter.title}</Link>
         </li>
@@ -18,13 +18,11 @@ const IndexPage = ({ data }) => (
   </Layout>
 )
 
-export default IndexPage
+export default NPCsPage
 
 export const indexQuery = graphql`
   query {
-    adventureLogs: allMdx(
-      filter: { fields: { slug: { regex: "/adventure-log/" } } }
-    ) {
+    npcs: allMdx(filter: { fields: { slug: { regex: "/npcs/" } } }) {
       nodes {
         fields {
           slug
@@ -32,8 +30,6 @@ export const indexQuery = graphql`
         fileAbsolutePath
         frontmatter {
           title
-          in_game_date
-          locations
         }
       }
     }
