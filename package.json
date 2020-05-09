@@ -8,6 +8,7 @@
     "-": "0.0.1",
     "@mdx-js/mdx": "^1.6.1",
     "@mdx-js/react": "^1.6.1",
+    "@theme-ui/presets": "^0.3.0",
     "babel-plugin-styled-components": "^1.10.7",
     "g": "^2.0.1",
     "gatsby": "^2.21.21",
@@ -19,6 +20,8 @@
     "gatsby-plugin-react-helmet": "^3.3.1",
     "gatsby-plugin-sharp": "^2.6.2",
     "gatsby-plugin-styled-components": "^3.3.1",
+    "gatsby-plugin-theme-ui": "^0.3.0",
+    "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-remark-images": "^3.3.2",
     "gatsby-source-filesystem": "^2.3.1",
     "gatsby-transformer-json": "^2.4.1",
@@ -27,7 +30,8 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.0.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "theme-ui": "^0.3.1"
   },
   "devDependencies": {
     "prettier": "2.0.5"
@@ -39,6 +43,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "dev-m": "gatsby develop -H 0.0.0.0 -p 8000",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",

@@ -3,11 +3,13 @@ import { Link } from "gatsby"
 import { graphql } from "gatsby"
 import Layout from "../components/layouts/main-layout"
 import SEO from "../components/seo"
+import { Heading } from "theme-ui"
 
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
-    <h2>Adventure Logs</h2>
+
+    <Heading as="h2">Adventure Logs</Heading>
     <ul>
       {data.adventureLogs.nodes.map(log => (
         <li>

@@ -1,7 +1,9 @@
+/** @jsx jsx */
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import { Link } from "gatsby"
+import Header from "../ui/header"
+import { jsx, Container } from "theme-ui"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -17,16 +19,8 @@ const Layout = ({ children }) => {
   return (
     <>
       <div>
-        <header>
-          <Link to="/">{data.site.siteMetadata.title}</Link>
-          <nav>
-            <Link to="/adventure-logs">Adventure Logs</Link>
-            <Link to="/npcs">NPCs</Link>
-            <Link to="/locations">Locations</Link>
-            <Link to="/items">Items</Link>
-          </nav>
-        </header>
-        <main>{children}</main>
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <Container>{children}</Container>
       </div>
     </>
   )

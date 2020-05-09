@@ -9,7 +9,16 @@ module.exports = {
     `gatsby-transformer-json`,
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
-    "gatsby-plugin-styled-components",
+    "gatsby-plugin-theme-ui",
+    `gatsby-remark-images`,
+    {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        google: {
+          families: ["Eczar", "Lato"],
+        },
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -25,8 +34,7 @@ module.exports = {
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#CD2B1E`,
-        display: `minimal-ui`,
-        // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        display: `minimal-ui`, // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
     {
@@ -88,7 +96,7 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/data/ddb-char-sheets`,
+        path: `${__dirname}/src/content/party/data/ddb-char-sheets`,
       },
     },
   ],
