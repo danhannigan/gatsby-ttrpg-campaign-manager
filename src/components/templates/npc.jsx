@@ -2,18 +2,19 @@ import React from "react"
 import { graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import Layout from "src/components/ui/layout"
 import { Link } from "gatsby"
+import { Styled } from "theme-ui"
+const shortcodes = { Link } // Provide common components here
 
-const shortcodes = { Link }
-
-export default function NPCPageTemplate({ data: { mdx } }) {
+export default function NPC({ data: { mdx } }) {
   return (
-    <div>
-      <h1>{mdx.frontmatter.title}</h1>
+    <Layout>
+      <Styled.h1>{mdx.frontmatter.title}</Styled.h1>
       <MDXProvider components={shortcodes}>
         <MDXRenderer>{mdx.body}</MDXRenderer>
       </MDXProvider>
-    </div>
+    </Layout>
   )
 }
 

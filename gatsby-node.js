@@ -5,44 +5,78 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
   if (node.internal.type === "Mdx") {
     const fileNode = getNode(node.parent)
-
     const value = createFilePath({ node, getNode })
     createNodeField({
       name: "slug",
       node,
       value: `${fileNode.sourceInstanceName}${value}`,
     })
+    createNodeField({
+      name: "collection",
+      node,
+      value: fileNode.sourceInstanceName,
+    })
   }
 }
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
-  // Destructure the createPage function from the actions object
   const { createPage } = actions
-  const compendiumPageQuery = await graphql(`
+  const pageQuery = await graphql(`
     query {
-      allMdx {
+      directories: allDirectory(
+        filter: {
+          base: { ne: "images" }
+          sourceInstanceName: { ne: "images" }
+          relativeDirectory: { eq: ".." }
+        }
+      ) {
+        edges {
+          node {
+            name
+          }
+        }
+      }
+      compendiumEntries: allMdx {
         edges {
           node {
             id
             fields {
               slug
+              collection
             }
           }
         }
       }
     }
   `)
-  if (compendiumPageQuery.errors) {
-    reporter.panicOnBuild('🚨  ERROR: Loading "compendiumPages" query')
+  if (pageQuery.errors) {
+    reporter.panicOnBuild('🚨  ERROR: Loading "pageQuery" query')
   }
-  const compendiumPages = compendiumPageQuery.data.allMdx.edges
-  compendiumPages.forEach(({ node }, index) => {
+  const compendiumDirectories = pageQuery.data.directories.edges
+  compendiumDirectories.forEach(({ node }, index) => {
+    createPage({
+      path: node.name,
+      component: path.resolve(`src/components/templates/directory.jsx`),
+      context: { ...node, id: node.id },
+    })
+  })
+
+  const compendiumEntries = pageQuery.data.compendiumEntries.edges
+  compendiumEntries.forEach(({ node }, index) => {
+    console.log("id", node.id)
     createPage({
       path: node.fields.slug,
       component: path.resolve(
-        `./src/components/layouts/adventure-log-layout.jsx`
+        `src/components/templates/${node.fields.collection.substring(
+          0,
+          node.fields.collection.length - 1
+        )}.jsx`
       ),
-      context: { id: node.id },
+      context: {
+        slug: node.fields.slug,
+        id: node.id,
+        collection: node.fields.collection,
+      },
     })
   })
 }

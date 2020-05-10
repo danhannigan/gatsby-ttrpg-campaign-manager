@@ -10,6 +10,7 @@ module.exports = {
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     "gatsby-plugin-theme-ui",
+    "gatsby-plugin-root-import",
     `gatsby-remark-images`,
     {
       resolve: "gatsby-plugin-web-font-loader",
@@ -61,8 +62,15 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "adventure-log",
-        path: `${__dirname}/src/content/adventure-log/`,
+        name: "adventure-logs",
+        path: `${__dirname}/src/content/adventure-logs/`,
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "characters",
+        path: `${__dirname}/src/content/characters/`,
       },
     },
     {
@@ -87,16 +95,9 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "party",
-        path: `${__dirname}/src/content/party/`,
-      },
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/content/party/data/ddb-char-sheets`,
+        path: `${__dirname}/src/content/characters/data/ddb-char-sheets`,
       },
     },
   ],

@@ -3,22 +3,24 @@ import { graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Link } from "gatsby"
+import { Styled } from "theme-ui"
+import Layout from "src/components/ui/layout"
 
-const shortcodes = { Link }
+const shortcodes = { Link } // Provide common components here
 
-export default function LocationPageTemplate({ data: { mdx } }) {
+export default function Item({ data: { mdx } }) {
   return (
-    <div>
-      <h1>{mdx.frontmatter.title}</h1>
+    <Layout>
+      <Styled.h1>{mdx.frontmatter.title}</Styled.h1>
       <MDXProvider components={shortcodes}>
         <MDXRenderer>{mdx.body}</MDXRenderer>
       </MDXProvider>
-    </div>
+    </Layout>
   )
 }
 
 export const pageQuery = graphql`
-  query LocationQuery($id: String) {
+  query ItemQuery($id: String) {
     mdx(id: { eq: $id }) {
       id
       body
