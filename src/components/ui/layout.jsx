@@ -17,12 +17,30 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
-      <div>
-        <Header siteTitle={data.site.siteMetadata.title} />
+    <div
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
+      <Header siteTitle={data.site.siteMetadata.title} />
+      <main
+        sx={{
+          width: "100%",
+          flex: "1 1 auto",
+        }}
+      >
         <Container>{children}</Container>
-      </div>
-    </>
+      </main>
+      <footer
+        sx={{
+          width: "100%",
+        }}
+      >
+        <Container>Footer</Container>
+      </footer>
+    </div>
   )
 }
 

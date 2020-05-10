@@ -66,6 +66,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     console.log("id", node.id)
     createPage({
       path: node.fields.slug,
+      // TODO: Find a better way to handle this. It's pretty brittle.
       component: path.resolve(
         `src/components/templates/${node.fields.collection.substring(
           0,
