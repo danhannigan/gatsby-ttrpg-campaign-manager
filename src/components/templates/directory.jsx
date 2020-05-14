@@ -3,7 +3,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "src/components/ui/layout"
-import Sidebar from "src/components/ui/sidebar"
+import Sidebar from "src/components/ui/Sidebar"
 import ToC from "src/components/ui/TableOfContents"
 import { Link } from "gatsby"
 import { jsx, Box, Grid, Styled } from "theme-ui"

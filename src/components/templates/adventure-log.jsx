@@ -7,8 +7,8 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Link } from "gatsby"
 import { Styled, Grid, Box, jsx } from "theme-ui"
 import Layout from "src/components/ui/layout"
-import Sidebar from "src/components/ui/sidebar"
-import ToC from "src/components/ui/TableofContents"
+import Sidebar from "src/components/ui/Sidebar"
+import ToC from "src/components/ui/TableOfContents"
 const shortcodes = { Link } // Provide common components here
 
 export default function AdventureLog({ data: { mdx } }) {
