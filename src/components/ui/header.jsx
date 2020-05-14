@@ -24,7 +24,15 @@ const Header = ({ siteTitle }) => {
 
   return (
     <header>
-      <Flex as="nav" sx={{ maxWidth: "container", margin: "0 auto" }}>
+      <Flex
+        as="nav"
+        sx={{
+          maxWidth: "container",
+          margin: "0 auto",
+          py: 3,
+          borderBottom: "1px solid #000",
+        }}
+      >
         <div sx={{ flex: "1 1 auto" }}>
           <NavLink as={Link} to="/" sx={{ py: 2 }}>
             {siteTitle}
@@ -35,7 +43,7 @@ const Header = ({ siteTitle }) => {
             as={Link}
             to={directory.node.name}
             sx={{
-              mr: 3,
+              ml: 3,
               py: 2,
               textTransform: "capitalize",
             }}

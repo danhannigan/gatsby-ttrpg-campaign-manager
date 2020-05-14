@@ -1,69 +1,51 @@
 import React from "react"
 import { Link } from "gatsby"
 import { graphql } from "gatsby"
-import Layout from "src/components/ui/layout"
+import LayoutHomepage from "src/components/ui/layout-homepage"
 import SEO from "src/components/seo"
-import { Heading, Card } from "theme-ui"
+import { Styled, Heading, Card, Image, Box, Text } from "theme-ui"
 
-const IndexPage = ({ data }) => (
-  <Layout>
+const IndexPage = () => (
+  <LayoutHomepage>
     <SEO title="Home" />
 
-    <Card>
-      <Heading as="h2">Adventure Logs</Heading>
-      <ul>
-        {data.adventureLogs.nodes.map(log => (
-          <li>
-            <Link to={log.fields.slug}>{log.frontmatter.title}</Link>
-          </li>
-        ))}
-      </ul>
-    </Card>
+    <Box>
+      <Image src={"https://source.unsplash.com/collection/3529549/900x400"} />
+    </Box>
 
-    <Card>
-      <Heading as="h2">Party</Heading>
-      <ul>
-        {data.party.nodes.map(log => (
-          <li>
-            <Link to={log.fields.slug}>{log.frontmatter.title}</Link>
-          </li>
-        ))}
-      </ul>
-    </Card>
-  </Layout>
+    <Box
+      sx={{
+        pt: 3,
+      }}
+    >
+      <Text>
+        <Styled.h3>The story so far...</Styled.h3>
+
+        <Styled.p>
+          Four heroes are bound together by a journey in the land of Eberron.
+          Their adventure starts simple enough: following the promise of
+          adventure and exploration around the continent of Khorvaire, aboard an
+          experimental airship known as the Celeste Noir, captained by the
+          famous gnome cartographer Angelica d’Sivis.
+        </Styled.p>
+
+        <Styled.p>
+          But things in Eberron are not always as they seem, and the land is
+          plagued by secret plots and corruption. The real Angelica was found
+          dead in Sharn! The impostor was an unknown Doppelgänger that likely
+          belonged to some kind of cult. This impostor, along with most of the
+          crew of the Celeste Noir, was killed during a vicious battle aboard
+          the airship. Aubrey fled into the night…
+        </Styled.p>
+
+        <Styled.p>
+          Through new found connections the party has been pulled into a plot
+          much larger than their original adventure. The potential fate of
+          Eberron is in their hands…
+        </Styled.p>
+      </Text>
+    </Box>
+  </LayoutHomepage>
 )
 
 export default IndexPage
-
-export const indexQuery = graphql`
-  query {
-    adventureLogs: allMdx(
-      filter: { fields: { slug: { regex: "/adventure-logs/" } } }
-    ) {
-      nodes {
-        fields {
-          slug
-        }
-        fileAbsolutePath
-        frontmatter {
-          title
-          in_game_date
-          locations
-        }
-      }
-    }
-    party: allMdx(filter: { fields: { slug: { regex: "/party/" } } }) {
-      nodes {
-        fields {
-          slug
-        }
-        fileAbsolutePath
-        frontmatter {
-          title
-          player
-          pronouns
-        }
-      }
-    }
-  }
-`

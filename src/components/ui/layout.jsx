@@ -29,6 +29,7 @@ const Layout = ({ children }) => {
         sx={{
           width: "100%",
           flex: "1 1 auto",
+          py: 4,
         }}
       >
         <Container>{children}</Container>
@@ -38,7 +39,7 @@ const Layout = ({ children }) => {
           width: "100%",
         }}
       >
-        <Container>Footer</Container>
+        <Container sx={{ pt: 3, borderTop: "1px solid #000" }}></Container>
       </footer>
     </div>
   )

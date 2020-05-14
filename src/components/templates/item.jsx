@@ -3,18 +3,35 @@ import { graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Link } from "gatsby"
-import { Styled } from "theme-ui"
+import { Styled, Card, Text, Image } from "theme-ui"
 import Layout from "src/components/ui/layout"
 
 const shortcodes = { Link } // Provide common components here
 
 export default function Item({ data: { mdx } }) {
+  const data = mdx.frontmatter
+
   return (
     <Layout>
-      <Styled.h1>{mdx.frontmatter.title}</Styled.h1>
-      <MDXProvider components={shortcodes}>
-        <MDXRenderer>{mdx.body}</MDXRenderer>
-      </MDXProvider>
+      <Card>
+        <Styled.h1>{data.title}</Styled.h1>
+        <div>
+          {" "}
+          {data.type} | {data.cost} | {data.weight}
+        </div>
+        <ul>
+          <h5>Tags</h5>
+          {data.tags.map(tag => (
+            <li>{tag}</li>
+          ))}
+        </ul>
+        <Image src={data.image} />
+        <Text>{data.description}</Text>
+
+        <MDXProvider components={shortcodes}>
+          <MDXRenderer>{mdx.body}</MDXRenderer>
+        </MDXProvider>
+      </Card>
     </Layout>
   )
 }
@@ -26,6 +43,12 @@ export const pageQuery = graphql`
       body
       frontmatter {
         title
+        tags
+        cost
+        weight
+        type
+        description
+        image
       }
     }
   }

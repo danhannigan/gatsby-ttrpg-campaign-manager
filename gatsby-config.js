@@ -1,3 +1,5 @@
+const remarkSlug = require("remark-slug")
+
 module.exports = {
   siteMetadata: {
     title: `Eberron Adventure`,
@@ -55,6 +57,7 @@ module.exports = {
             options: {
               maxWidth: 1200,
             },
+            remarkPlugins: [remarkSlug],
           },
         ],
       },

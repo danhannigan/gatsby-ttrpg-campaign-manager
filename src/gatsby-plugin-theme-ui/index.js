@@ -21,9 +21,11 @@ export default {
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 72],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   sizes: {
-    container: 1280,
-    content: 700,
+    container: 1200,
+    content: 850,
+    sidebar: 300,
   },
+
   styles: {
     root: {
       fontFamily: "body",
@@ -53,6 +55,28 @@ export default {
     h6: {
       variant: "text.heading",
       fontSize: 0,
+    },
+
+    a: {
+      color: "secondary",
+      fontWeight: "body",
+      textDecoration: "none",
+    },
+  },
+
+  links: {
+    bold: {
+      fontWeight: "bold",
+    },
+    nav: {
+      fontWeight: "bold",
+      color: "inherit",
+      textDecoration: "none",
+    },
+    sidebar: {
+      fontWeight: "body",
+      color: "secondary",
+      textDecoration: "none",
     },
   },
 }
