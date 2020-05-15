@@ -1,5 +1,5 @@
 import React from "react"
-import LayoutHomepage from "src/components/ui/layout-homepage"
+import LayoutHomepage from "src/components/ui/LayoutHomepage"
 import SEO from "src/components/seo"
 import { Styled, Image, Box, Text } from "theme-ui"
 

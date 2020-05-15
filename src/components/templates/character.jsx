@@ -4,7 +4,7 @@ import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Link } from "gatsby"
 import { Styled } from "theme-ui"
-import Layout from "src/components/ui/layout"
+import Layout from "src/components/ui/Layout"
 const shortcodes = { Link } // Provide common components here
 
 export default function CharacterSheet({ data: { content, charsheet } }) {

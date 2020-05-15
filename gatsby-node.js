@@ -63,7 +63,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const compendiumEntries = pageQuery.data.compendiumEntries.edges
   compendiumEntries.forEach(({ node }, index) => {
-    console.log("id", node.id)
     createPage({
       path: node.fields.slug,
       // TODO: Find a better way to handle this. It's pretty brittle.

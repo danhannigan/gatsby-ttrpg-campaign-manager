@@ -15,9 +15,9 @@ const ToC = ({ items }) => {
       >
         {items.map(item => (
           <li sx={{ mb: 2 }}>
-            {/* <Link to={item.url} variant="sidebar">
+            <Link to={item.url} variant="sidebar">
               {item.title}
-            </Link> */}
+            </Link>
           </li>
         ))}
       </ul>

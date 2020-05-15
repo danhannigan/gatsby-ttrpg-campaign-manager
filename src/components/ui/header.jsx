@@ -68,7 +68,7 @@ const Header = ({ siteTitle }) => {
           {data.allDirectory.edges.map(directory => (
             <NavLink
               as={Link}
-              to={directory.node.name}
+              to={`/${directory.node.name}/`}
               sx={{
                 ml: 3,
                 py: 2,

@@ -1,21 +1,40 @@
 /** @jsx jsx */
 
+// eslint-disable-next-line no-unused-vars
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "src/components/ui/layout"
+import Layout from "src/components/ui/Layout"
 import Sidebar from "src/components/ui/Sidebar"
-import ToC from "src/components/ui/TableOfContents"
+import ToC from "src/components/ui/ToC"
 import { Link } from "gatsby"
-import { jsx, Box, Grid, Styled, Image } from "theme-ui"
-import Img from "gatsby-image"
+import { jsx, Box, Grid } from "theme-ui"
 
-export default function DirectoryPage({
-  data: {
-    allFile: { edges },
-  },
-  pageContext,
-}) {
-  const entries = edges
+import AdventureLog from "src/components/ui/AdventureLog"
+import Character from "src/components/ui/Character"
+import Item from "src/components/ui/Item"
+import Location from "src/components/ui/Location"
+import NPC from "src/components/ui/NPC"
+
+const renderNodeType = node => {
+  switch (node.fields.collection) {
+    case "adventure-logs":
+      return (
+        <AdventureLog frontmatter={node.frontmatter} excerpt={node.excerpt} />
+      )
+    case "characters":
+      return <Character frontmatter={node.frontmatter} />
+    case "items":
+      return <Item frontmatter={node.frontmatter} />
+    case "locations":
+      return <Location frontmatter={node.frontmatter} />
+    case "npcs":
+      return <NPC frontmatter={node.frontmatter} />
+    default:
+      return <div></div>
+  }
+}
+
+export default function DirectoryPage({ data, pageContext }) {
   return (
     <Layout>
       <Grid gap={4} columns={[1, "300px 1fr"]}>
@@ -26,24 +45,7 @@ export default function DirectoryPage({
               m: 0,
               p: 0,
             }}
-          >
-            {entries
-              .filter(e => e.node.sourceInstanceName.includes(pageContext.name))
-              .map(entry => (
-                <li sx={{ mb: 2 }} key={entry.node.id}>
-                  <Link
-                    to={entry.node.childMdx.fields.slug}
-                    sx={{
-                      color: "secondary",
-                      fontWeight: "body",
-                      textDecoration: "none",
-                    }}
-                  >
-                    {entry.node.childMdx.frontmatter.title}
-                  </Link>
-                </li>
-              ))}{" "}
-          </ul>
+          ></ul>
         </Sidebar>
         <Box variant="content">
           <ul
@@ -53,17 +55,12 @@ export default function DirectoryPage({
               p: 0,
             }}
           >
-            {entries
-              .filter(e => e.node.sourceInstanceName.includes(pageContext.name))
-              .map(entry => (
-                <li
-                  key={entry.node.id}
-                  sx={{
-                    mb: 4,
-                  }}
-                >
+            {data.allMdx.edges
+              .filter(e => e.node.fields.collection.includes(pageContext.name))
+              .map(({ node }) => (
+                <li key={node.id} sx={{ mb: 4 }}>
                   <Link
-                    to={entry.node.childMdx.fields.slug}
+                    to={`/${node.fields.slug}/`}
                     sx={{
                       color: "inherit",
                       textDecoration: "none",
@@ -73,57 +70,11 @@ export default function DirectoryPage({
                       },
                       display: "flex",
                       flexWrap: "wrap",
-                      border: "1px solid #efefef",
                       padding: 3,
+                      border: "1px solid #ddd",
                     }}
                   >
-                    {(entry.node.sourceInstanceName === "characters" ||
-                      entry.node.sourceInstanceName === "items" ||
-                      entry.node.sourceInstanceName === "npcs") && (
-                      <>
-                        {entry.node.childMdx.frontmatter.image !== null ? (
-                          <Img
-                            fluid={
-                              entry.node.childMdx.frontmatter.image
-                                .childImageSharp.fluid
-                            }
-                            sx={{
-                              width: ["50px", "50px", "75px"],
-                              height: ["50px", "50px", "75px"],
-                              mr: 3,
-                            }}
-                          />
-                        ) : (
-                          <div
-                            sx={{
-                              width: ["50px", "50px", "75px"],
-                              height: ["50px", "50px", "75px"],
-                              mr: 3,
-                              background: "#efefef",
-                              border: "1px solid #ddd",
-                            }}
-                          ></div>
-                        )}{" "}
-                      </>
-                    )}
-                    <div>
-                      <Styled.h3
-                        sx={{
-                          m: 0,
-                          p: 0,
-                        }}
-                      >
-                        {entry.node.childMdx.frontmatter.title}
-                      </Styled.h3>
-                      {entry.node.sourceInstanceName === "adventure-logs" && (
-                        <Styled.p>{entry.node.childMdx.excerpt}</Styled.p>
-                      )}
-                      {entry.node.sourceInstanceName === "characters" && (
-                        <div>
-                          Player: {entry.node.childMdx.frontmatter.player}
-                        </div>
-                      )}
-                    </div>
+                    {renderNodeType(node)}
                   </Link>
                 </li>
               ))}
@@ -136,33 +87,21 @@ export default function DirectoryPage({
 
 export const query = graphql`
   query DirectoryEntries {
-    allFile(filter: { internal: { mediaType: { eq: "text/mdx" } } }) {
+    allMdx {
+      totalCount
       edges {
         node {
           id
-          childMdx {
-            fields {
-              slug
-            }
-            excerpt
-            frontmatter {
-              title
-              player
-              pronouns
-              image {
-                childImageSharp {
-                  fluid(maxWidth: 800) {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
-              }
-            }
+          fields {
+            slug
+            collection
           }
-          internal {
-            content
-            mediaType
-          }
-          sourceInstanceName
+          excerpt
+          ...AdventureLogFragment
+          ...CharacterFragment
+          ...ItemFragment
+          ...LocationFragment
+          ...NPCFragment
         }
       }
     }
