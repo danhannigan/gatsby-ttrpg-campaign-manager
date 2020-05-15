@@ -3,9 +3,7 @@
 import { jsx } from "theme-ui"
 const heading = Tag => props => {
   if (!props.id) return <Tag {...props} />
-  return (
-    <Tag {...props}>{/* <a href={`#${props.id}`}>{props.children}</a> */}</Tag>
-  )
+  return <Tag {...props}>{<a href={`#${props.id}`}>{props.children}</a>}</Tag>
 }
 const components = {
   h1: heading("h1"),
