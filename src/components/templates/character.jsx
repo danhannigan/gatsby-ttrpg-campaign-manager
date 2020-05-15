@@ -7,24 +7,42 @@ import { Styled } from "theme-ui"
 import Layout from "src/components/ui/layout"
 const shortcodes = { Link } // Provide common components here
 
-export default function CharacterSheet({ data: { mdx } }) {
+export default function CharacterSheet({ data: { content, charsheet } }) {
   return (
     <Layout>
-      <Styled.h1>{mdx.frontmatter.title}</Styled.h1>
+      <Styled.h1>{content.frontmatter.title}</Styled.h1>
       <MDXProvider components={shortcodes}>
-        <MDXRenderer>{mdx.body}</MDXRenderer>
+        <MDXRenderer>{content.body}</MDXRenderer>
       </MDXProvider>
     </Layout>
   )
 }
 
 export const pageQuery = graphql`
-  query CharacterSheetQuery($id: String) {
-    mdx(id: { eq: $id }) {
+  query CharacterSheetQuery($id: String, $title: String) {
+    content: mdx(id: { eq: $id }) {
       id
       body
       frontmatter {
         title
+      }
+    }
+    charsheet: ddbCharSheetsJson(character: { name: { eq: $title } }) {
+      id
+      character {
+        name
+        classes {
+          level
+          definition {
+            name
+          }
+          subclassDefinition {
+            name
+          }
+        }
+        race {
+          baseName
+        }
       }
     }
   }

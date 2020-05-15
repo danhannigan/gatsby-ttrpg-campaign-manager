@@ -2,7 +2,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql, Link } from "gatsby"
-import Header from "./header"
+import Header from "./Header"
 import { jsx, Container, Grid } from "theme-ui"
 
 const LayoutHomepage = ({ children }) => {
@@ -60,8 +60,8 @@ const LayoutHomepage = ({ children }) => {
         sx={{
           width: "100%",
           flex: "1 1 auto",
-          py: 4,
-          px: [2, 2, 0],
+          py: ["100px", "100px", 4],
+          px: [3, 3, 0],
         }}
       >
         <Container>

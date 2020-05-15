@@ -7,10 +7,10 @@ module.exports = {
     author: `@danhannigan`,
   },
   plugins: [
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-json`,
-    "gatsby-transformer-sharp",
-    "gatsby-plugin-sharp",
     "gatsby-plugin-theme-ui",
     "gatsby-plugin-root-import",
     `gatsby-remark-images`,

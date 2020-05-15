@@ -1,9 +1,7 @@
 import React from "react"
-import { Link } from "gatsby"
-import { graphql } from "gatsby"
 import LayoutHomepage from "src/components/ui/layout-homepage"
 import SEO from "src/components/seo"
-import { Styled, Heading, Card, Image, Box, Text } from "theme-ui"
+import { Styled, Image, Box, Text } from "theme-ui"
 
 const IndexPage = () => (
   <LayoutHomepage>

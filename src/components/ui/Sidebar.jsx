@@ -10,9 +10,12 @@ const Sidebar = ({ children }) => {
         paddingRight: [0, 4],
         borderRight: ["none", "1px solid #000"],
         minHeight: [0, "80vh"],
+        display: ["none", "block", "block"],
       }}
     >
-      <div sx={{ position: "sticky", top: 3 }}>{children}</div>
+      <div sx={{ position: ["inherit", "relative", "sticky"], top: 3 }}>
+        {children}
+      </div>
     </aside>
   )
 }

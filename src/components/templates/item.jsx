@@ -48,7 +48,7 @@ export const pageQuery = graphql`
         weight
         type
         description
-        image
+        # image
       }
     }
   }
