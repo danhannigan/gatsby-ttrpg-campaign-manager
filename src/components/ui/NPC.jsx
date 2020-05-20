@@ -1,33 +1,24 @@
+/** @jsx jsx */
 import React from "react"
 import { graphql } from "gatsby"
-import Img from "gatsby-image"
+import EntryImage from "ui/EntryImage"
+import { jsx } from "theme-ui"
+import TagList from "ui/TagList"
 
 export default function NPC({
-  frontmatter: { title, name, race, location, pronouns, image },
+  frontmatter: { title, name, race, location, pronouns, image, tags },
 }) {
   return (
-    <div>
-      <h4>{name}</h4>
-      {image !== null ? (
-        <Img
-          fluid={image.childImageSharp.fluid}
-          sx={{
-            width: ["50px", "50px", "75px"],
-            height: ["50px", "50px", "75px"],
-            mr: 3,
-          }}
-        />
-      ) : (
-        <div
-          sx={{
-            width: ["50px", "50px", "75px"],
-            height: ["50px", "50px", "75px"],
-            mr: 3,
-            background: "#efefef",
-            border: "1px solid #ddd",
-          }}
-        ></div>
-      )}
+    <div sx={{ display: "flex" }}>
+      <EntryImage image={image} />
+      <div>
+        <h4 sx={{ m: 0, p: 0 }}>{name}</h4>
+        <div sx={{ fontSize: 1 }}>
+          {" "}
+          {race} | {location} | {pronouns}
+        </div>
+        <TagList tags={tags} />
+      </div>
     </div>
   )
 }

@@ -1,16 +1,14 @@
+/** @jsx jsx */
 import React from "react"
 import { graphql } from "gatsby"
+import TagList from "ui/TagList"
+import { jsx } from "theme-ui"
 
 export default function Location({ frontmatter: { title, tags }, excerpt }) {
   return (
     <div>
-      <h4>{title}</h4>
-      <ul>
-        <h5>Locations</h5>
-        {tags.map(tag => (
-          <li key={tags}>{tags}</li>
-        ))}
-      </ul>
+      <h4 sx={{ m: 0, p: 0 }}>{title}</h4>
+      <TagList tags={tags} />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 const remarkSlug = require("remark-slug")
+const path = require("path")
 
 module.exports = {
   siteMetadata: {
@@ -12,8 +13,16 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-json`,
     "gatsby-plugin-theme-ui",
-    "gatsby-plugin-root-import",
     `gatsby-remark-images`,
+    {
+      resolve: "gatsby-plugin-root-import",
+      options: {
+        ui: path.join(__dirname, "src/components/ui"),
+        templates: path.join(__dirname, "src/components/templates"),
+        components: path.join(__dirname, "src/components"),
+        pages: path.join(__dirname, "src/pages"),
+      },
+    },
     {
       resolve: "gatsby-plugin-web-font-loader",
       options: {

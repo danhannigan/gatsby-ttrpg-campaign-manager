@@ -4,7 +4,7 @@ import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Link } from "gatsby"
 import { Styled, Card, Text, Image } from "theme-ui"
-import Layout from "src/components/ui/Layout"
+import Layout from "ui/Layout"
 
 const shortcodes = { Link } // Provide common components here
 

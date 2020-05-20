@@ -1,24 +1,31 @@
+/** @jsx jsx */
+
 import React from "react"
 import { graphql } from "gatsby"
-import { Image } from "theme-ui"
+import { jsx } from "theme-ui"
+import EntryImage from "ui/EntryImage"
+import TagList from "ui/TagList"
 
 export default function Item({
   frontmatter: { title, tags, cost, weight, type, description, image },
 }) {
   return (
-    <div>
-      <h4>{title}</h4>
-      <div>
-        {" "}
-        {type} | {cost} | {weight}
+    <div sx={{ display: "flex" }}>
+      <EntryImage image={image} />
+      <div
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          flexDirection: "column",
+        }}
+      >
+        <h4 sx={{ margin: 0, padding: 0 }}>{title}</h4>
+        <div sx={{ fontSize: 1 }}>
+          {" "}
+          {type} | {cost} | {weight}
+        </div>
+        <TagList tags={tags} />
       </div>
-      <ul>
-        <h5>Tags</h5>
-        {tags.map(tag => (
-          <li key={tag}>{tag}</li>
-        ))}
-      </ul>
-      <Image src={image} />
     </div>
   )
 }

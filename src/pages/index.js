@@ -1,6 +1,6 @@
 import React from "react"
-import LayoutHomepage from "src/components/ui/LayoutHomepage"
-import SEO from "src/components/seo"
+import LayoutHomepage from "ui/LayoutHomepage"
+import SEO from "components/seo"
 import { Styled, Image, Box, Text } from "theme-ui"
 
 const IndexPage = () => (

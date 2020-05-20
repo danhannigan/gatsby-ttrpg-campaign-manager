@@ -3,17 +3,17 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "src/components/ui/Layout"
-import Sidebar from "src/components/ui/Sidebar"
-import ToC from "src/components/ui/ToC"
+import Layout from "ui/Layout"
+import Sidebar from "ui/Sidebar"
+import ToC from "ui/ToC"
 import { Link } from "gatsby"
 import { jsx, Box, Grid } from "theme-ui"
 
-import AdventureLog from "src/components/ui/AdventureLog"
-import Character from "src/components/ui/Character"
-import Item from "src/components/ui/Item"
-import Location from "src/components/ui/Location"
-import NPC from "src/components/ui/NPC"
+import AdventureLog from "ui/AdventureLog"
+import Character from "ui/Character"
+import Item from "ui/Item"
+import Location from "ui/Location"
+import NPC from "ui/NPC"
 
 const renderNodeType = node => {
   switch (node.fields.collection) {
@@ -65,8 +65,8 @@ export default function DirectoryPage({ data, pageContext }) {
                       color: "inherit",
                       textDecoration: "none",
                       ":hover,:focus": {
-                        color: "primary",
-                        textDecoration: "underline",
+                        color: "text",
+                        textDecoration: "none",
                       },
                       display: "flex",
                       flexWrap: "wrap",
@@ -96,12 +96,34 @@ export const query = graphql`
             slug
             collection
           }
-          excerpt
+          excerpt(pruneLength: 500)
           ...AdventureLogFragment
           ...CharacterFragment
           ...ItemFragment
           ...LocationFragment
           ...NPCFragment
+        }
+      }
+    }
+    allDdbCharSheetsJson {
+      edges {
+        node {
+          id
+          character {
+            name
+            classes {
+              level
+              definition {
+                name
+              }
+              subclassDefinition {
+                name
+              }
+            }
+            race {
+              baseName
+            }
+          }
         }
       }
     }
