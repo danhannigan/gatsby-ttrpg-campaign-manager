@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import React from "react"
 import { graphql } from "gatsby"
-import EntryImage from "ui/EntryImage"
 import { jsx } from "theme-ui"
+import EntryImage from "ui/EntryImage"
 import TagList from "ui/TagList"
 
 export default function NPC({

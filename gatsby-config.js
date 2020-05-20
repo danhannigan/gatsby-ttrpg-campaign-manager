@@ -15,12 +15,12 @@ module.exports = {
     "gatsby-plugin-theme-ui",
     `gatsby-remark-images`,
     {
-      resolve: "gatsby-plugin-root-import",
+      resolve: `gatsby-alias-imports`,
       options: {
-        ui: path.join(__dirname, "src/components/ui"),
-        templates: path.join(__dirname, "src/components/templates"),
-        components: path.join(__dirname, "src/components"),
-        pages: path.join(__dirname, "src/pages"),
+        aliases: {
+          ui: `./src/components/ui/`,
+          components: `./src/components/`,
+        },
       },
     },
     {

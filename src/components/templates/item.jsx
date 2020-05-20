@@ -1,8 +1,7 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import { Link } from "gatsby"
 import { Styled, Card, Text, Image } from "theme-ui"
 import Layout from "ui/Layout"
 

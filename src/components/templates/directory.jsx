@@ -2,12 +2,11 @@
 
 // eslint-disable-next-line no-unused-vars
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
+import { jsx, Box, Grid } from "theme-ui"
 import Layout from "ui/Layout"
 import Sidebar from "ui/Sidebar"
 import ToC from "ui/ToC"
-import { Link } from "gatsby"
-import { jsx, Box, Grid } from "theme-ui"
 
 import AdventureLog from "ui/AdventureLog"
 import Character from "ui/Character"

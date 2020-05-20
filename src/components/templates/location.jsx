@@ -1,10 +1,9 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import Layout from "ui/Layout"
-import { Link } from "gatsby"
 import { Styled } from "theme-ui"
+import Layout from "ui/Layout"
 const shortcodes = { Link } // Provide common components here
 
 export default function Location({ data: { mdx } }) {
