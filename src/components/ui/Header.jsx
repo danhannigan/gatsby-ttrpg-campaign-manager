@@ -9,7 +9,7 @@ const Header = ({ siteTitle }) => {
   const toggle = () => setIsOpen(!isOpen)
 
   const data = useStaticQuery(graphql`
-    query DirectoryQuery {
+    {
       allDirectory(
         filter: {
           base: { ne: "images" }
