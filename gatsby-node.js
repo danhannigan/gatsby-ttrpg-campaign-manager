@@ -80,3 +80,26 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   })
 }
+
+exports.createSchemaCustomization = ({ actions, schema }) => {
+  const { createTypes } = actions
+  const typeDefs = [
+    "type Mdx implements Node { frontmatter: Frontmatter }",
+    schema.buildObjectType({
+      name: "Frontmatter",
+      fields: {
+        ddbId: {
+          type: "DdbCharSheetsJson",
+          resolve: (source, args, context, info) => {
+            return context.nodeModel
+              .getAllNodes({ type: "DdbCharSheetsJson" })
+              .find(character => {
+                return character.id === source.ddbId
+              })
+          },
+        },
+      },
+    }),
+  ]
+  createTypes(typeDefs)
+}

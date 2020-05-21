@@ -2,18 +2,28 @@
 import React from "react"
 import { graphql } from "gatsby"
 import EntryImage from "ui/EntryImage"
-
 import { jsx } from "theme-ui"
 
 export default function Character({
-  frontmatter: { title, player, pronouns, image },
+  frontmatter: { title, player, pronouns, image, ddbId },
 }) {
   return (
     <div sx={{ display: "flex" }}>
       <EntryImage image={image} />
       <div>
-        <h4 sx={{ m: 0, p: 0 }}>{title}</h4>
-        <div sx={{ fontSize: 1 }}>{pronouns}</div>
+        <h3 sx={{ m: 0, p: 0 }}>{ddbId.name}</h3>
+        <div sx={{ fontSize: 1, display: "flex" }}>
+          {ddbId.race.baseName}&nbsp;|&nbsp;
+          {ddbId.classes.map(ddbClass => (
+            <div>
+              Lvl {ddbClass.level} {ddbClass.definition.name}
+              {ddbClass.subclassDefinition && (
+                <span>&nbsp;/ {ddbClass.subclassDefinition.name}</span>
+              )}
+              &nbsp;|&nbsp;
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -30,6 +40,21 @@ export const query = graphql`
           fluid(maxWidth: 800) {
             ...GatsbyImageSharpFluid
           }
+        }
+      }
+      ddbId {
+        name
+        race {
+          baseName
+        }
+        classes {
+          definition {
+            name
+          }
+          subclassDefinition {
+            name
+          }
+          level
         }
       }
     }

@@ -86,7 +86,12 @@ export default function DirectoryPage({ data, pageContext }) {
 
 export const query = graphql`
   query DirectoryEntries {
-    allMdx {
+    allMdx(
+      sort: {
+        order: [DESC, ASC]
+        fields: [frontmatter___date, frontmatter___title]
+      }
+    ) {
       totalCount
       edges {
         node {
@@ -101,28 +106,6 @@ export const query = graphql`
           ...ItemFragment
           ...LocationFragment
           ...NPCFragment
-        }
-      }
-    }
-    allDdbCharSheetsJson {
-      edges {
-        node {
-          id
-          character {
-            name
-            classes {
-              level
-              definition {
-                name
-              }
-              subclassDefinition {
-                name
-              }
-            }
-            race {
-              baseName
-            }
-          }
         }
       }
     }

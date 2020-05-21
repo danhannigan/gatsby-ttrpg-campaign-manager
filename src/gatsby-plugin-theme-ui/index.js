@@ -25,7 +25,9 @@ export default {
     content: 850,
     sidebar: 300,
   },
-
+  layout: {
+    content: 560,
+  },
   styles: {
     root: {
       fontFamily: "body",
