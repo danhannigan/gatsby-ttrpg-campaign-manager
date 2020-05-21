@@ -29,7 +29,12 @@ const LayoutHomepage = ({ children }) => {
           }
         }
       }
-      party: allMdx(filter: { fields: { slug: { regex: "/characters/" } } }) {
+      party: allMdx(
+        filter: {
+          fields: { collection: { eq: "characters" } }
+          frontmatter: { player: { ne: null } }
+        }
+      ) {
         nodes {
           fields {
             slug

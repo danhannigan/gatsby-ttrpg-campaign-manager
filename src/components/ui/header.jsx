@@ -47,10 +47,19 @@ const Header = ({ siteTitle }) => {
           zIndex: "10",
         }}
       >
-        <div sx={{ flex: "1 1 auto" }}>
-          <NavLink as={Link} to="/" sx={{ py: 2 }}>
+        <div sx={{ flex: "1 1 auto", display: "flex" }}>
+          <Link
+            to="/"
+            sx={{
+              py: 2,
+              textTransform: "capitalize",
+              textDecoration: "none",
+              fontWeight: "bold",
+              color: "text",
+            }}
+          >
             {siteTitle}
-          </NavLink>
+          </Link>
         </div>
         <MenuButton
           sx={{ display: ["inline-block", "inline-block", "none"] }}
@@ -66,18 +75,22 @@ const Header = ({ siteTitle }) => {
           }}
         >
           {data.allDirectory.edges.map(directory => (
-            <NavLink
-              as={Link}
+            <Link
               to={`/${directory.node.name}/`}
+              activeStyle={{ color: "#CD2B1E" }}
               sx={{
                 ml: 3,
                 py: 2,
                 textTransform: "capitalize",
+                textDecoration: "none",
+                fontWeight: "bold",
+                color: "text",
               }}
               key={directory.node.name}
+              partiallyActive={true}
             >
               {`${directory.node.name.replace(/-/g, " ")}`}
-            </NavLink>
+            </Link>
           ))}
         </div>
       </Flex>

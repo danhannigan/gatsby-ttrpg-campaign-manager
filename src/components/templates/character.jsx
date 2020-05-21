@@ -22,17 +22,20 @@ export default function CharacterSheet({ data: { content } }) {
         ></Box>
         <Box>
           <Styled.h1>{content.frontmatter.title}</Styled.h1>
-          {charSheet.name}
-          {charSheet.race.baseName}
-          {charSheet.classes.map(charClass => (
-            <div>
-              Lvl {charClass.level} {charClass.definition.name}
-              {charClass.subclassDefinition && (
-                <span>&nbsp;/ {charClass.subclassDefinition.name}</span>
-              )}
-              &nbsp;|&nbsp;
-            </div>
-          ))}
+          {content.frontmatter.ddbId !== null && (
+            <>
+              {charSheet.race.baseName}
+              {charSheet.classes.map(charClass => (
+                <div>
+                  Lvl {charClass.level} {charClass.definition.name}
+                  {charClass.subclassDefinition && (
+                    <span>&nbsp;/ {charClass.subclassDefinition.name}</span>
+                  )}
+                  &nbsp;|&nbsp;
+                </div>
+              ))}
+            </>
+          )}
         </Box>
       </Grid>
     </Layout>

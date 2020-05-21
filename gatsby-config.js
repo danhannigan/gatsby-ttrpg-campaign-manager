@@ -100,13 +100,6 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "npcs",
-        path: `${__dirname}/src/content/npcs/`,
-      },
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/src/content/characters/data/ddb-char-sheets`,

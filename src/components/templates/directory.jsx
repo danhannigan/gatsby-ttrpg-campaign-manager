@@ -12,7 +12,6 @@ import AdventureLog from "ui/AdventureLog"
 import Character from "ui/Character"
 import Item from "ui/Item"
 import Location from "ui/Location"
-import NPC from "ui/NPC"
 
 const renderNodeType = node => {
   switch (node.fields.collection) {
@@ -26,14 +25,20 @@ const renderNodeType = node => {
       return <Item frontmatter={node.frontmatter} />
     case "locations":
       return <Location frontmatter={node.frontmatter} />
-    case "npcs":
-      return <NPC frontmatter={node.frontmatter} />
     default:
       return <div></div>
   }
 }
 
 export default function DirectoryPage({ data, pageContext }) {
+  const currentPageMdx = data.allMdx.edges.filter(e =>
+    e.node.fields.collection.includes(pageContext.name)
+  )
+  const playerMdx = currentPageMdx.filter(
+    e => e.node.frontmatter.player !== null
+  )
+  const npcMdx = currentPageMdx.filter(e => e.node.frontmatter.player === null)
+
   return (
     <Layout>
       <Grid gap={4} columns={[1, "300px 1fr"]}>
@@ -44,7 +49,57 @@ export default function DirectoryPage({ data, pageContext }) {
               m: 0,
               p: 0,
             }}
-          ></ul>
+          >
+            {pageContext.name === "characters" ? (
+              <>
+                <h3 sx={{ m: 0, mb: 2, borderBottom: "1px solid #efefef" }}>
+                  Players
+                </h3>
+                {playerMdx.map(({ node }) => (
+                  <li sx={{ mb: 1, pl: 1, fontSize: 1 }}>
+                    <Link
+                      to={`/${node.fields.slug}/`}
+                      variant="sidebar"
+                      sx={{ color: "secondary", textDecoration: "none" }}
+                    >
+                      {node.frontmatter.title}
+                    </Link>
+                  </li>
+                ))}
+                <h3 sx={{ mt: 3, mb: 2, borderBottom: "1px solid #efefef" }}>
+                  NPCs
+                </h3>
+                {npcMdx.map(({ node }) => (
+                  <li sx={{ mb: 1, pl: 1, fontSize: 1 }}>
+                    <Link
+                      to={`/${node.fields.slug}/`}
+                      variant="sidebar"
+                      sx={{ color: "secondary", textDecoration: "none" }}
+                    >
+                      {node.frontmatter.title}
+                    </Link>
+                  </li>
+                ))}
+              </>
+            ) : (
+              <>
+                <h3 sx={{ m: 0, mb: 2, borderBottom: "1px solid #efefef" }}>
+                  Entries
+                </h3>
+                {currentPageMdx.map(({ node }) => (
+                  <li sx={{ mb: 1, pl: 1, fontSize: 1 }}>
+                    <Link
+                      to={`/${node.fields.slug}/`}
+                      variant="sidebar"
+                      sx={{ color: "secondary", textDecoration: "none" }}
+                    >
+                      {node.frontmatter.title}
+                    </Link>
+                  </li>
+                ))}
+              </>
+            )}
+          </ul>
         </Sidebar>
         <Box variant="content">
           <ul
@@ -54,29 +109,80 @@ export default function DirectoryPage({ data, pageContext }) {
               p: 0,
             }}
           >
-            {data.allMdx.edges
-              .filter(e => e.node.fields.collection.includes(pageContext.name))
-              .map(({ node }) => (
-                <li key={node.id} sx={{ mb: 4 }}>
-                  <Link
-                    to={`/${node.fields.slug}/`}
-                    sx={{
-                      color: "inherit",
-                      textDecoration: "none",
-                      ":hover,:focus": {
-                        color: "text",
+            {pageContext.name === "characters" ? (
+              <>
+                <h3>Player Characters</h3>
+                <>
+                  {playerMdx.map(({ node }) => (
+                    <li key={node.id} sx={{ mb: 4 }}>
+                      <Link
+                        to={`/${node.fields.slug}/`}
+                        sx={{
+                          color: "inherit",
+                          textDecoration: "none",
+                          ":hover,:focus": {
+                            color: "text",
+                            textDecoration: "none",
+                          },
+                          display: "flex",
+                          flexWrap: "wrap",
+                          padding: 3,
+                          border: "1px solid #ddd",
+                        }}
+                      >
+                        {renderNodeType(node)}
+                      </Link>
+                    </li>
+                  ))}
+                </>
+                <h3>NPCs</h3>
+                {npcMdx.map(({ node }) => (
+                  <li key={node.id} sx={{ mb: 4 }}>
+                    <Link
+                      to={`/${node.fields.slug}/`}
+                      sx={{
+                        color: "inherit",
                         textDecoration: "none",
-                      },
-                      display: "flex",
-                      flexWrap: "wrap",
-                      padding: 3,
-                      border: "1px solid #ddd",
-                    }}
-                  >
-                    {renderNodeType(node)}
-                  </Link>
-                </li>
-              ))}
+                        ":hover,:focus": {
+                          color: "text",
+                          textDecoration: "none",
+                        },
+                        display: "flex",
+                        flexWrap: "wrap",
+                        padding: 3,
+                        border: "1px solid #ddd",
+                      }}
+                    >
+                      {renderNodeType(node)}
+                    </Link>
+                  </li>
+                ))}
+              </>
+            ) : (
+              <>
+                {currentPageMdx.map(({ node }) => (
+                  <li key={node.id} sx={{ mb: 4 }}>
+                    <Link
+                      to={`/${node.fields.slug}/`}
+                      sx={{
+                        color: "inherit",
+                        textDecoration: "none",
+                        ":hover,:focus": {
+                          color: "text",
+                          textDecoration: "none",
+                        },
+                        display: "flex",
+                        flexWrap: "wrap",
+                        padding: 3,
+                        border: "1px solid #ddd",
+                      }}
+                    >
+                      {renderNodeType(node)}
+                    </Link>
+                  </li>
+                ))}
+              </>
+            )}
           </ul>
         </Box>
       </Grid>
@@ -105,7 +211,6 @@ export const query = graphql`
           ...CharacterFragment
           ...ItemFragment
           ...LocationFragment
-          ...NPCFragment
         }
       }
     }

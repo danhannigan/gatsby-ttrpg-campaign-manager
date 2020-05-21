@@ -11,19 +11,23 @@ export default function Character({
     <div sx={{ display: "flex" }}>
       <EntryImage image={image} />
       <div>
-        <h3 sx={{ m: 0, p: 0 }}>{ddbId.name}</h3>
-        <div sx={{ fontSize: 1, display: "flex" }}>
-          {ddbId.race.baseName}&nbsp;|&nbsp;
-          {ddbId.classes.map(ddbClass => (
-            <div>
-              Lvl {ddbClass.level} {ddbClass.definition.name}
-              {ddbClass.subclassDefinition && (
-                <span>&nbsp;/ {ddbClass.subclassDefinition.name}</span>
-              )}
-              &nbsp;|&nbsp;
+        <h3 sx={{ m: 0, p: 0 }}>{title}</h3>
+        {ddbId !== null && (
+          <>
+            <div sx={{ fontSize: 1, display: "flex" }}>
+              {ddbId.race.baseName}&nbsp;|&nbsp;
+              {ddbId.classes.map(ddbClass => (
+                <div>
+                  Lvl {ddbClass.level} {ddbClass.definition.name}
+                  {ddbClass.subclassDefinition && (
+                    <span>&nbsp;/ {ddbClass.subclassDefinition.name}</span>
+                  )}
+                  &nbsp;|&nbsp;
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </div>
     </div>
   )
@@ -33,8 +37,12 @@ export const query = graphql`
   fragment CharacterFragment on Mdx {
     frontmatter {
       title
-      player
+      name
+      race
+      location
+      tags
       pronouns
+      player
       image {
         childImageSharp {
           fluid(maxWidth: 800) {
