@@ -14,7 +14,13 @@ export default function Character({
         <h3 sx={{ m: 0, p: 0 }}>{title}</h3>
         {ddbId !== null && (
           <>
-            <div sx={{ fontSize: 1, display: "flex" }}>
+            <div
+              sx={{
+                fontSize: 1,
+                display: "flex",
+                flexDirection: ["column", "column", "row"],
+              }}
+            >
               {ddbId.race.baseName}&nbsp;|&nbsp;
               {ddbId.classes.map(ddbClass => (
                 <div>
